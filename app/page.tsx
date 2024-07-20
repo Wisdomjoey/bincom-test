@@ -1,6 +1,7 @@
 "use client";
 
 import PUResultGraph from "@/components/PUResultGraph";
+import TotalOverview from "@/components/TotalOverview";
 
 export default function Home() {
 	return (
@@ -25,7 +26,7 @@ export default function Home() {
 						</div>
 
 						<div className="flex-1">
-              <TotalOverview
+              <TotalOverview />
             </div>
 					</div>
 				</section>

@@ -1,5 +1,6 @@
 "use client";
 
+import PollingUnitsDisplay from "@/components/PollingUnitsDisplay";
 import PUResultGraph from "@/components/PUResultGraph";
 import TotalOverview from "@/components/TotalOverview";
 
@@ -14,22 +15,32 @@ export default function Home() {
 
 			<hr className="w-[90%] mx-auto" />
 
-			<main className="py-5 px-5">
+			<main className="py-5 px-5 sm:space-y-10">
 				<section>
 					<h2 className="text-textcolor text-xl xs:text-lg font-medium">
 						Overview
 					</h2>
 
 					<div className="flex items-center gap-10 sm:flex-col">
-						<div className="flex-1">
+						<div className="flex-1 sm:w-full">
 							<PUResultGraph />
 						</div>
 
-						<hr className="md:h-20 sm:w-20 md:border-l" />
+						<hr className="md:h-60 sm:w-60 md:border-l" />
 
-						<div className="flex-1">
+						<div className="flex-1 sm:w-full">
 							<TotalOverview />
 						</div>
+					</div>
+				</section>
+
+				<section>
+					<h2 className="text-textcolor text-xl xs:text-lg font-medium">
+						Polling Units
+					</h2>
+
+					<div className="overflow-x-hidden">
+						<PollingUnitsDisplay />
 					</div>
 				</section>
 			</main>

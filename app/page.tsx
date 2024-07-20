@@ -25,9 +25,11 @@ export default function Home() {
 							<PUResultGraph />
 						</div>
 
+						<hr className="h-[90%] sm:w-[90%]" />
+
 						<div className="flex-1">
-              <TotalOverview />
-            </div>
+							<TotalOverview />
+						</div>
 					</div>
 				</section>
 			</main>

@@ -9,13 +9,13 @@ function TotalOverview() {
 			].map((val, ind) => (
 				<div
 					key={ind}
-					className="rounded-md px-5 py-6 bg-secondary/50 space-y-2"
+					className="rounded-md px-5 py-6 border border-secondary/50 space-y-1"
 				>
 					<h2 className="text-xl xs:text-lg font-medium text-secondary">
 						{val.head}
 					</h2>
 
-					<p className="text-primary text-2xl xs:text-xl font-bold">
+					<p className="text-primary text-4xl xs:text-3xl font-bold">
 						{val.text}
 					</p>
 				</div>

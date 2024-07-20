@@ -15,7 +15,7 @@ export default function Home() {
 
 			<hr className="w-[90%] mx-auto" />
 
-			<main className="py-5 px-5 sm:space-y-10">
+			<main className="py-5 px-5 space-y-5 sm:space-y-14">
 				<section>
 					<h2 className="text-textcolor text-xl xs:text-lg font-medium">
 						Overview
@@ -26,7 +26,7 @@ export default function Home() {
 							<PUResultGraph />
 						</div>
 
-						<hr className="md:h-60 sm:w-60 md:border-l" />
+						<hr className="md:h-92 tablet:w-60 xs:w-32 md:border-l" />
 
 						<div className="flex-1 sm:w-full">
 							<TotalOverview />
@@ -34,7 +34,7 @@ export default function Home() {
 					</div>
 				</section>
 
-				<section>
+				<section className="space-y-10">
 					<h2 className="text-textcolor text-xl xs:text-lg font-medium">
 						Polling Units
 					</h2>

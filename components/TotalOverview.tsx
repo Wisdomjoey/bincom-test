@@ -1,6 +1,6 @@
 function TotalOverview() {
 	return (
-		<div className="grid grid-cols-2 gap-5">
+		<div className="grid grid-cols-2 xs:grid-cols-1 gap-5">
 			{[
 				{ head: "State", text: "Delta" },
 				{ head: "LGAs", text: "0" },

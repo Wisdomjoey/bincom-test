@@ -10,11 +10,12 @@ function PollingUnitsDisplay() {
 
   return (
     <div className="space-y-5">
-      <div className="flex items-center justify-between gap-5">
+      <div className="flex flex-wrap items-center justify-between gap-5">
         <div className="flex items-center gap-3 flex-1">
           <Select
             label="LGA"
             value={lga}
+            size="small"
             onChange={(e) => setLga(e.target.value)}
           >
             <MenuItem value={"LGA1"}>LGA 1</MenuItem>
@@ -25,6 +26,7 @@ function PollingUnitsDisplay() {
           <Select
             label="Ward"
             value={ward}
+            size="small"
             onChange={(e) => setWard(e.target.value)}
           >
             <MenuItem value={"Ward1"}>Ward 1</MenuItem>

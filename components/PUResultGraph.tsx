@@ -4,6 +4,7 @@ function PUResultGraph() {
 	return (
 		<div className="w-full max-w-md aspect-square mx-auto">
 			<PieChart
+				tooltip={{ trigger: 'item' }}
 				colors={[
 					"#009933",
 					"#e7ae27",

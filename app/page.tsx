@@ -25,7 +25,7 @@ export default function Home() {
 							<PUResultGraph />
 						</div>
 
-						<hr className="h-[90%] sm:w-[90%]" />
+						<hr className="h-20 sm:w-20" />
 
 						<div className="flex-1">
 							<TotalOverview />

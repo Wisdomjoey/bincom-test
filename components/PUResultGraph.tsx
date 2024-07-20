@@ -13,8 +13,13 @@ function PUResultGraph() {
           "254222",
           "#4f6e71",
         ]}
+        loading={false}
+        skipAnimation={true}
         slotProps={{
           legend: {
+            labelStyle: { fontSize: 16 },
+            itemMarkWidth: 10,
+            itemMarkHeight: 10,
             direction: "row",
             position: { vertical: "bottom", horizontal: "middle" },
           },

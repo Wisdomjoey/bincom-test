@@ -11,7 +11,7 @@ function PollingUnitsDisplay() {
   return (
     <div className="space-y-5">
       <div className="flex flex-wrap items-center justify-between gap-5">
-        <div className="flex items-center gap-3 flex-1">
+        <div className="flex items-center gap-3">
           <Select
             label="LGA"
             value={lga}
@@ -35,15 +35,16 @@ function PollingUnitsDisplay() {
           </Select>
         </div>
 
-        <div className="flex items-center gap-3 flex-1">
+        <div className="flex items-center gap-3">
           <Button
             variant="contained"
+            title="New Unit"
             className="bg-primary text-[white]"
             startIcon={
               <AddIcon fill="#fff" stroke="#fff" className="w-5 h-5" />
             }
           >
-            New Unit
+            <span className="xs:hidden">New Unit</span>
           </Button>
 
           <Button

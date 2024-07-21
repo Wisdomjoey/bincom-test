@@ -52,8 +52,8 @@ function PollingUnitsDisplay() {
   }, []);
 
   useEffect(() => {
-    console.log('ward')
     if (lga !== "") {
+      console.log('ward')
       setLoading(true);
 
       fetchLGAWards(parseInt(lga)).then((data) => {
@@ -72,8 +72,8 @@ function PollingUnitsDisplay() {
   }, [lga]);
 
   useEffect(() => {
-    console.log('unit')
     if (ward !== "") {
+      console.log('unit')
       fetchWardPUs(parseInt(ward)).then((data) => {
         if (data.error) {
           console.error(data.error);

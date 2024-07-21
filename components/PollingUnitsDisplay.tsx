@@ -180,7 +180,7 @@ function PollingUnitsDisplay() {
           <TablePagination
             rowsPerPage={15}
             count={pollUnits.length}
-            onPageChange={(_, pg) => {}}
+            onPageChange={(_, pg) => {console.log(pg)}}
             page={0}
           />
         </TableContainer>

@@ -15,7 +15,7 @@ export default function Home() {
 
 			<hr className="w-[90%] mx-auto" />
 
-			<main className="py-5 px-5 space-y-5 sm:space-y-14">
+			<main className="p-5 xs:px-0 space-y-5 sm:space-y-14">
 				<section>
 					<h2 className="text-textcolor text-xl xs:text-lg font-medium">
 						Overview

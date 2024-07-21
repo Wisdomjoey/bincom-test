@@ -1,6 +1,16 @@
 "use client";
 
-import { Button, MenuItem, Select } from "@mui/material";
+import {
+  Button,
+  MenuItem,
+  Select,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 import { useState } from "react";
 import { AddIcon } from "./svgs/svg";
 
@@ -39,7 +49,7 @@ function PollingUnitsDisplay() {
           <Button
             variant="contained"
             title="New Unit"
-            className="bg-primary text-[white]"
+            className="bg-primary text-[white] [&>span]:!m-0"
             startIcon={
               <AddIcon fill="#fff" stroke="#fff" className="w-5 h-5" />
             }
@@ -47,14 +57,66 @@ function PollingUnitsDisplay() {
             <span className="xs:hidden">New Unit</span>
           </Button>
 
-          <Button
-            variant="contained"
-            className="bg-primary text-[white]"
-          >
+          <Button variant="contained" className="bg-primary text-[white]">
             Compare Results
           </Button>
         </div>
       </div>
+
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Head 1</TableCell>
+              <TableCell>Head 2</TableCell>
+              <TableCell>Head 3</TableCell>
+              <TableCell>Head 4</TableCell>
+              <TableCell>Head 5</TableCell>
+              <TableCell>Head 6</TableCell>
+              <TableCell>Head 7</TableCell>
+            </TableRow>
+          </TableHead>
+
+          <TableBody>
+            <TableRow>
+              <TableCell>Data 1</TableCell>
+              <TableCell>Data 2</TableCell>
+              <TableCell>Data 3</TableCell>
+              <TableCell>Data 4</TableCell>
+              <TableCell>Data 5</TableCell>
+              <TableCell>Data 6</TableCell>
+              <TableCell>Data 7</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Data 1</TableCell>
+              <TableCell>Data 2</TableCell>
+              <TableCell>Data 3</TableCell>
+              <TableCell>Data 4</TableCell>
+              <TableCell>Data 5</TableCell>
+              <TableCell>Data 6</TableCell>
+              <TableCell>Data 7</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Data 1</TableCell>
+              <TableCell>Data 2</TableCell>
+              <TableCell>Data 3</TableCell>
+              <TableCell>Data 4</TableCell>
+              <TableCell>Data 5</TableCell>
+              <TableCell>Data 6</TableCell>
+              <TableCell>Data 7</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Data 1</TableCell>
+              <TableCell>Data 2</TableCell>
+              <TableCell>Data 3</TableCell>
+              <TableCell>Data 4</TableCell>
+              <TableCell>Data 5</TableCell>
+              <TableCell>Data 6</TableCell>
+              <TableCell>Data 7</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }

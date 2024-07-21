@@ -12,122 +12,179 @@ import {
   TablePagination,
   TableRow,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AddIcon } from "./svgs/svg";
+import { LGA, PollingUnit, Ward } from "@/types";
+import { fetchLGAs } from "@/data/lga";
+import { fetchLGAWards } from "@/data/ward";
+import { fetchWardPUs } from "@/data/polling_unit";
+import Loader from "./widgets/loader";
 
 function PollingUnitsDisplay() {
-  const [lga, setLga] = useState("LGA1");
-  const [ward, setWard] = useState("Ward1");
+  const [loading, setLoading] = useState(true);
+  const [start, setStart] = useState(0);
+  const [lga, setLga] = useState("");
+  const [ward, setWard] = useState("");
+  const [lgas, setLgas] = useState<LGA[]>([]);
+  const [wards, setWards] = useState<Ward[]>([]);
+  const [pollUnits, setPollUnits] = useState<PollingUnit[]>([]);
+
+  useEffect(() => {
+    fetchLGAs()
+      .then((data) => {
+        if (data.error) {
+          console.error(data.error);
+
+          return alert("Something went wrong");
+        }
+
+        if (data.data) {
+          setLgas(data.data);
+          setLga(data.data[0]?.lga_id?.toString() ?? "");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Something went wrong");
+      });
+  }, []);
+
+  useEffect(() => {
+    if (lga !== "") {
+      setLoading(true);
+
+      fetchLGAWards(lga).then((data) => {
+        if (data.error) {
+          console.error(data.error);
+
+          return alert("Something went wrong");
+        }
+
+        if (data.data) {
+          setWards(data.data);
+          setWard(data.data[0]?.ward_id?.toString() ?? "");
+        }
+      });
+    }
+  }, [lga]);
+
+  useEffect(() => {
+    if (ward !== "") {
+      fetchWardPUs(ward).then((data) => {
+        if (data.error) {
+          console.error(data.error);
+
+          return alert("Something went wrong");
+        }
+
+        if (data.data) {
+          setPollUnits(data.data);
+          setLoading(false);
+        }
+      });
+    }
+  }, [ward]);
 
   return (
     <div className="space-y-5">
-    <div className="flex flex-wrap items-center justify-between gap-5">
-      <div className="flex items-center gap-3">
-        <Select
-          label="LGA"
-          value={lga}
-          size="small"
-          onChange={(e) => setLga(e.target.value)}
-        >
-          <MenuItem value={"LGA1"}>LGA 1</MenuItem>
-          <MenuItem value={"LGA2"}>LGA 2</MenuItem>
-          <MenuItem value={"LGA3"}>LGA 3</MenuItem>
-        </Select>
+      <div className="flex flex-wrap items-center justify-between gap-5">
+        <div className="flex items-center gap-3">
+          <Select
+            label="LGA"
+            value={lga}
+            size="small"
+            onChange={(e) => setLga(e.target.value)}
+          >
+            {lgas.map((lga, ind) => (
+              <MenuItem key={ind} value={lga.lga_id}>
+                {lga.lga_name}
+              </MenuItem>
+            ))}
+          </Select>
 
-        <Select
-          label="Ward"
-          value={ward}
-          size="small"
-          onChange={(e) => setWard(e.target.value)}
-        >
-          <MenuItem value={"Ward1"}>Ward 1</MenuItem>
-          <MenuItem value={"Ward2"}>Ward 2</MenuItem>
-          <MenuItem value={"Ward3"}>Ward 3</MenuItem>
-        </Select>
+          <Select
+            label="Ward"
+            value={ward}
+            size="small"
+            onChange={(e) => setWard(e.target.value)}
+          >
+            {wards.map((ward, ind) => (
+              <MenuItem key={ind} value={ward.ward_id}>
+                {ward.ward_name}
+              </MenuItem>
+            ))}
+          </Select>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <Button
+            variant="contained"
+            title="New Unit"
+            className="bg-primary text-[white] hover:bg-primary/80"
+            startIcon={
+              <AddIcon fill="#fff" stroke="#fff" className="w-5 h-5" />
+            }
+          >
+            <span className="xs:hidden">New Unit</span>
+          </Button>
+
+          <Button
+            variant="contained"
+            className="bg-primary text-[white] hover:bg-primary/80"
+          >
+            Compare Results
+          </Button>
+        </div>
       </div>
 
-      <div className="flex items-center gap-3">
-        <Button
-          variant="contained"
-          title="New Unit"
-          className="bg-primary text-[white] hover:bg-primary/80"
-          startIcon={
-            <AddIcon fill="#fff" stroke="#fff" className="w-5 h-5" />
-          }
-        >
-          <span className="xs:hidden">New Unit</span>
-        </Button>
+      {loading && <Loader />}
 
-        <Button
-          variant="contained"
-          className="bg-primary text-[white] hover:bg-primary/80"
-        >
-          Compare Results
-        </Button>
-      </div>
-    </div>
+      {!loading && (
+        <TableContainer>
+          <Table className="whitespace-nowrap">
+            <TableHead className="bg-primary/10">
+              <TableRow>
+                <TableCell>S/N</TableCell>
+                <TableCell>ID</TableCell>
+                <TableCell>Unit Number</TableCell>
+                <TableCell>Unit Name</TableCell>
+                <TableCell>Unit Description</TableCell>
+                <TableCell>Entered By</TableCell>
+                <TableCell>User IP</TableCell>
+                <TableCell>Date Entered</TableCell>
+                <TableCell>Longitude</TableCell>
+                <TableCell>Latitude</TableCell>
+              </TableRow>
+            </TableHead>
 
-      <TableContainer>
-        <Table className="whitespace-nowrap">
-          <TableHead className="bg-primary/10">
-            <TableRow>
-              <TableCell>Head 1</TableCell>
-              <TableCell>Head 2</TableCell>
-              <TableCell>Head 3</TableCell>
-              <TableCell>Head 4</TableCell>
-              <TableCell>Head 5</TableCell>
-              <TableCell>Head 6</TableCell>
-              <TableCell>Head 7</TableCell>
-            </TableRow>
-          </TableHead>
+            <TableBody>
+              {pollUnits.splice(start, 15).map((unit, ind) => (
+                <TableRow key={ind}>
+                  <TableCell>{ind + 1}</TableCell>
+                  <TableCell>{unit.polling_unit_id}</TableCell>
+                  <TableCell>{unit.polling_unit_number}</TableCell>
+                  <TableCell>{unit.polling_unit_name}</TableCell>
+                  <TableCell>{unit.polling_unit_description ?? ""}</TableCell>
+                  <TableCell>{unit.entered_by_user ?? ""}</TableCell>
+                  <TableCell>{unit.user_ip_address ?? ""}</TableCell>
+                  <TableCell>
+                    {new Date(unit.date_entered).toDateString()}
+                  </TableCell>
+                  <TableCell>{unit.long}</TableCell>
+                  <TableCell>{unit.lat}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
 
-          <TableBody>
-            <TableRow>
-              <TableCell>Data 1</TableCell>
-              <TableCell>Data 2</TableCell>
-              <TableCell>Data 3</TableCell>
-              <TableCell>Data 4</TableCell>
-              <TableCell>Data 5</TableCell>
-              <TableCell>Data 6</TableCell>
-              <TableCell>Data 7</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Data 1</TableCell>
-              <TableCell>Data 2</TableCell>
-              <TableCell>Data 3</TableCell>
-              <TableCell>Data 4</TableCell>
-              <TableCell>Data 5</TableCell>
-              <TableCell>Data 6</TableCell>
-              <TableCell>Data 7</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Data 1</TableCell>
-              <TableCell>Data 2</TableCell>
-              <TableCell>Data 3</TableCell>
-              <TableCell>Data 4</TableCell>
-              <TableCell>Data 5</TableCell>
-              <TableCell>Data 6</TableCell>
-              <TableCell>Data 7</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Data 1</TableCell>
-              <TableCell>Data 2</TableCell>
-              <TableCell>Data 3</TableCell>
-              <TableCell>Data 4</TableCell>
-              <TableCell>Data 5</TableCell>
-              <TableCell>Data 6</TableCell>
-              <TableCell>Data 7</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-
-        <TablePagination
-          rowsPerPage={10}
-          count={10}
-          onPageChange={() => {}}
-          page={0}
-        />
-      </TableContainer>
+          <TablePagination
+            rowsPerPage={15}
+            count={pollUnits.length}
+            onPageChange={(_, pg) => setStart(pg * 15)}
+            page={start / 15}
+          />
+        </TableContainer>
+      )}
     </div>
   );
 }

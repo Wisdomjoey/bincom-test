@@ -1,5 +1,3 @@
-"use client";
-
 import PollingUnitsDisplay from "@/components/PollingUnitsDisplay";
 import PUResultGraph from "@/components/PUResultGraph";
 import TotalOverview from "@/components/TotalOverview";

@@ -21,55 +21,55 @@ function PollingUnitsDisplay() {
 
   return (
     <div className="space-y-5">
-      <TableContainer className="space-y-5">
-        <div className="flex flex-wrap items-center justify-between gap-5">
-          <div className="flex items-center gap-3">
-            <Select
-              label="LGA"
-              value={lga}
-              size="small"
-              onChange={(e) => setLga(e.target.value)}
-            >
-              <MenuItem value={"LGA1"}>LGA 1</MenuItem>
-              <MenuItem value={"LGA2"}>LGA 2</MenuItem>
-              <MenuItem value={"LGA3"}>LGA 3</MenuItem>
-            </Select>
+    <div className="flex flex-wrap items-center justify-between gap-5">
+      <div className="flex items-center gap-3">
+        <Select
+          label="LGA"
+          value={lga}
+          size="small"
+          onChange={(e) => setLga(e.target.value)}
+        >
+          <MenuItem value={"LGA1"}>LGA 1</MenuItem>
+          <MenuItem value={"LGA2"}>LGA 2</MenuItem>
+          <MenuItem value={"LGA3"}>LGA 3</MenuItem>
+        </Select>
 
-            <Select
-              label="Ward"
-              value={ward}
-              size="small"
-              onChange={(e) => setWard(e.target.value)}
-            >
-              <MenuItem value={"Ward1"}>Ward 1</MenuItem>
-              <MenuItem value={"Ward2"}>Ward 2</MenuItem>
-              <MenuItem value={"Ward3"}>Ward 3</MenuItem>
-            </Select>
-          </div>
+        <Select
+          label="Ward"
+          value={ward}
+          size="small"
+          onChange={(e) => setWard(e.target.value)}
+        >
+          <MenuItem value={"Ward1"}>Ward 1</MenuItem>
+          <MenuItem value={"Ward2"}>Ward 2</MenuItem>
+          <MenuItem value={"Ward3"}>Ward 3</MenuItem>
+        </Select>
+      </div>
 
-          <div className="flex items-center gap-3">
-            <Button
-              variant="contained"
-              title="New Unit"
-              className="bg-primary text-[white] hover:bg-primary/80"
-              startIcon={
-                <AddIcon fill="#fff" stroke="#fff" className="w-5 h-5" />
-              }
-            >
-              <span className="xs:hidden">New Unit</span>
-            </Button>
+      <div className="flex items-center gap-3">
+        <Button
+          variant="contained"
+          title="New Unit"
+          className="bg-primary text-[white] hover:bg-primary/80"
+          startIcon={
+            <AddIcon fill="#fff" stroke="#fff" className="w-5 h-5" />
+          }
+        >
+          <span className="xs:hidden">New Unit</span>
+        </Button>
 
-            <Button
-              variant="contained"
-              className="bg-primary text-[white] hover:bg-primary/80"
-            >
-              Compare Results
-            </Button>
-          </div>
-        </div>
+        <Button
+          variant="contained"
+          className="bg-primary text-[white] hover:bg-primary/80"
+        >
+          Compare Results
+        </Button>
+      </div>
+    </div>
 
-        <Table>
-          <TableHead>
+      <TableContainer>
+        <Table className="whitespace-nowrap">
+          <TableHead className="bg-primary/10">
             <TableRow>
               <TableCell>Head 1</TableCell>
               <TableCell>Head 2</TableCell>

@@ -53,7 +53,7 @@ function PollingUnitsDisplay() {
     if (lga !== "") {
       setLoading(true);
 
-      fetchLGAWards(lga).then((data) => {
+      fetchLGAWards(parseInt(lga)).then((data) => {
         if (data.error) {
           console.error(data.error);
 
@@ -70,7 +70,7 @@ function PollingUnitsDisplay() {
 
   useEffect(() => {
     if (ward !== "") {
-      fetchWardPUs(ward).then((data) => {
+      fetchWardPUs(parseInt(ward)).then((data) => {
         if (data.error) {
           console.error(data.error);
 
@@ -180,7 +180,10 @@ function PollingUnitsDisplay() {
           <TablePagination
             rowsPerPage={15}
             count={pollUnits.length}
-            onPageChange={(_, pg) => {console.log(pg)}}
+            onPageChange={(_, pg) => {
+              setStart(pg * 15);
+              console.log(pg);
+            }}
             page={0}
           />
         </TableContainer>

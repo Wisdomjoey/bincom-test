@@ -19,7 +19,7 @@ export const fetchTotalPUs = async () => {
   }
 };
 
-export const fetchWardPUs = async (ward_id: string) => {
+export const fetchWardPUs = async (ward_id: number) => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/ward-polling-units`,

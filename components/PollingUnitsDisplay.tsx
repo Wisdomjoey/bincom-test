@@ -30,6 +30,8 @@ function PollingUnitsDisplay() {
   const [pollUnits, setPollUnits] = useState<PollingUnit[]>([]);
 
   useEffect(() => {
+    console.log('lga')
+
     fetchLGAs()
       .then((data) => {
         if (data.error) {
@@ -50,6 +52,7 @@ function PollingUnitsDisplay() {
   }, []);
 
   useEffect(() => {
+    console.log('ward')
     if (lga !== "") {
       setLoading(true);
 
@@ -69,6 +72,7 @@ function PollingUnitsDisplay() {
   }, [lga]);
 
   useEffect(() => {
+    console.log('unit')
     if (ward !== "") {
       fetchWardPUs(parseInt(ward)).then((data) => {
         if (data.error) {

@@ -45,6 +45,32 @@ export const fetchPUById = async (unit_id: number) => {
   }
 };
 
+export const fetchLGAPUs = async (lga_id: number) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/lga-polling-units`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ lga_id }),
+      }
+    );
+
+    if (!res.ok) return { error: "Failed to fetch data" };
+
+    const data: APIResponse = await res.json();
+
+    return {
+      data: data.data as PollingUnit[],
+      success: "Successfully fetched data",
+    };
+  } catch (error) {
+    return { error: "Something went wrong" };
+  }
+};
+
 export const fetchWardPUs = async (ward_id: number) => {
   try {
     const res = await fetch(

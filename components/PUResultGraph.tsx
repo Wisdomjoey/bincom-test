@@ -4,15 +4,26 @@ import { fetchTotalPollResults } from "@/data/result";
 import { PieChart } from "@mui/x-charts";
 import { useEffect, useState } from "react";
 
-function PUResultGraph() {
-  const [data, setData] = useState<{ party: string; result: number }[]>([]);
+function PUResultGraph({
+  results,
+}: {
+  results?: { label: string; result: number }[];
+}) {
+  const [data, setData] = useState<{ label: string; result: number }[]>(
+    results ?? []
+  );
   const [error, setError] = useState<string>();
 
   useEffect(() => {
+    if (results) return;
+
     fetchTotalPollResults().then((data) => {
       if (data.error) return setError(data.error);
 
-      if (data.data) setData(data.data);
+      if (data.data)
+        setData(
+          data.data.map((val) => ({ label: val.party, result: val.result }))
+        );
     });
   }, []);
 
@@ -47,7 +58,7 @@ function PUResultGraph() {
               data: [
                 ...data.map((val, ind) => ({
                   id: ind,
-                  label: val.party,
+                  label: val.label,
                   value: val.result,
                 })),
               ],

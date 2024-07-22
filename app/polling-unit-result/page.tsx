@@ -24,7 +24,7 @@ export default async function PollingUnitResultPage({
         <GoBack />
 
         <h1 className="text-textcolor font-bold text-2xl xs:text-xl tracking-wider xs:tracking-wide capitalize">
-          {name}: Polling Unit Election Results
+          {name}: Unit Election Results
         </h1>
       </header>
 

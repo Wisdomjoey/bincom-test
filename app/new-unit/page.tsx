@@ -23,7 +23,7 @@ export default async function NewPollingUnitPage({
         <GoBack />
 
         <h1 className="text-textcolor font-bold text-2xl xs:text-xl tracking-wider xs:tracking-wide capitalize">
-          Upload Polling Unit Election Results
+          Upload Election Results
         </h1>
       </header>
 

@@ -8,6 +8,7 @@ import {
   TableBody,
   TableCell,
   TableContainer,
+  TableFooter,
   TableHead,
   TablePagination,
   TableRow,
@@ -19,8 +20,11 @@ import { fetchLGAs } from "@/data/lga";
 import { fetchLGAWards } from "@/data/ward";
 import { fetchWardPUs } from "@/data/polling_unit";
 import Loader from "./widgets/loader";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 function PollingUnitsDisplay() {
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [start, setStart] = useState(0);
   const [lga, setLga] = useState("");
@@ -30,8 +34,6 @@ function PollingUnitsDisplay() {
   const [pollUnits, setPollUnits] = useState<PollingUnit[]>([]);
 
   useEffect(() => {
-    console.log('lga')
-
     fetchLGAs()
       .then((data) => {
         if (data.error) {
@@ -53,7 +55,6 @@ function PollingUnitsDisplay() {
 
   useEffect(() => {
     if (lga !== "") {
-      console.log('ward')
       setLoading(true);
 
       fetchLGAWards(parseInt(lga)).then((data) => {
@@ -73,7 +74,6 @@ function PollingUnitsDisplay() {
 
   useEffect(() => {
     if (ward !== "") {
-      console.log('unit')
       fetchWardPUs(parseInt(ward)).then((data) => {
         if (data.error) {
           console.error(data.error);
@@ -124,7 +124,7 @@ function PollingUnitsDisplay() {
           <Button
             variant="contained"
             title="New Unit"
-            className="bg-primary text-[white] hover:bg-primary/80"
+            className="bg-primary text-[white] hover:bg-primary/80 xs:[&>span]:!m-0"
             startIcon={
               <AddIcon fill="#fff" stroke="#fff" className="w-5 h-5" />
             }
@@ -163,33 +163,43 @@ function PollingUnitsDisplay() {
 
             <TableBody>
               {pollUnits.splice(start, 15).map((unit, ind) => (
-                <TableRow key={ind}>
-                  <TableCell>{ind + 1}</TableCell>
-                  <TableCell>{unit.polling_unit_id}</TableCell>
-                  <TableCell>{unit.polling_unit_number}</TableCell>
-                  <TableCell>{unit.polling_unit_name}</TableCell>
-                  <TableCell>{unit.polling_unit_description ?? ""}</TableCell>
-                  <TableCell>{unit.entered_by_user ?? ""}</TableCell>
-                  <TableCell>{unit.user_ip_address ?? ""}</TableCell>
-                  <TableCell>
-                    {new Date(unit.date_entered).toDateString()}
-                  </TableCell>
-                  <TableCell>{unit.long}</TableCell>
-                  <TableCell>{unit.lat}</TableCell>
-                </TableRow>
+                <Link
+                  key={ind}
+                  href={`/polling-unit-result?name=${unit.polling_unit_name}&id=${unit.polling_unit_id}`}
+                  className="hover:bg-[#ededed] cursor-pointer"
+                >
+                  <TableRow>
+                    <TableCell>{ind + 1}</TableCell>
+                    <TableCell>{unit.polling_unit_id}</TableCell>
+                    <TableCell>{unit.polling_unit_number}</TableCell>
+                    <TableCell>{unit.polling_unit_name}</TableCell>
+                    <TableCell>{unit.polling_unit_description ?? ""}</TableCell>
+                    <TableCell>{unit.entered_by_user ?? ""}</TableCell>
+                    <TableCell>{unit.user_ip_address ?? ""}</TableCell>
+                    <TableCell>
+                      {new Date(unit.date_entered).toDateString()}
+                    </TableCell>
+                    <TableCell>{unit.long}</TableCell>
+                    <TableCell>{unit.lat}</TableCell>
+                  </TableRow>
+                </Link>
               ))}
             </TableBody>
-          </Table>
 
-          <TablePagination
-            rowsPerPage={15}
-            count={pollUnits.length}
-            onPageChange={(_, pg) => {
-              setStart(pg * 15);
-              console.log(pg);
-            }}
-            page={0}
-          />
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  rowsPerPage={15}
+                  count={pollUnits.length}
+                  onPageChange={(_, pg) => {
+                    setStart(pg * 15);
+                    console.log(pg);
+                  }}
+                  page={0}
+                />
+              </TableRow>
+            </TableFooter>
+          </Table>
         </TableContainer>
       )}
     </div>

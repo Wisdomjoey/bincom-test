@@ -1,20 +1,27 @@
+import BasicInfo from "@/components/pu/BasicInfo";
+import PUResult from "@/components/pu/PUResult";
+import { fetchPUById } from "@/data/polling_unit";
 import { notFound } from "next/navigation";
 
-export default function PollingUnitResultPage({
+export default async function PollingUnitResultPage({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  //   const name = searchParams.name;
-  //   const id = searchParams.id;
+  const name = searchParams.name;
+  const id = searchParams.id;
 
-  //   if (!name || !id) return notFound();
+  if (!name || !id) return notFound();
+
+  const unit = await fetchPUById(parseInt(id as string));
+
+  if (unit.error || !unit.data) return notFound();
 
   return (
     <div className="px-3">
       <header className="relative px-8 py-6 xs:px-2 xs:py-5">
         <h1 className="text-textcolor font-bold text-2xl xs:text-xl tracking-wider xs:tracking-wide">
-          {"name"}: Polling Unit Election Results
+          {name}: Polling Unit Election Results
         </h1>
       </header>
 
@@ -26,17 +33,7 @@ export default function PollingUnitResultPage({
             Polling Unit Info
           </h2>
 
-          <div className="md:grid grid-cols-3 tablet:grid-cols-2 gap-5">
-            {[].map((val, ind) => (
-              <div key={ind} className="space-y-1">
-                <h3 className="text-primary font-medium text-lg uppercase xs:text-base">
-                  {}
-                </h3>
-
-                <p className="text-textcolor text-2xl xs:text-xl">{}</p>
-              </div>
-            ))}
-          </div>
+          <BasicInfo unit={unit.data} />
         </section>
 
         <hr className="w-[90%] mx-auto" />
@@ -46,9 +43,7 @@ export default function PollingUnitResultPage({
             Election Results
           </h2>
 
-          <div className="flex flex-col gap-5">
-            
-          </div>
+          <PUResult id={unit.data.uniqueid} />
         </section>
       </main>
     </div>

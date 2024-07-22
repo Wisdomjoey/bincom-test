@@ -20,15 +20,15 @@ export default async function PollingUnitResultPage({
   return (
     <div className="px-3">
       <header className="relative px-8 py-6 xs:px-2 xs:py-5">
-        <h1 className="text-textcolor font-bold text-2xl xs:text-xl tracking-wider xs:tracking-wide">
+        <h1 className="text-textcolor font-bold text-2xl xs:text-xl tracking-wider xs:tracking-wide capitalize">
           {name}: Polling Unit Election Results
         </h1>
       </header>
 
       <hr className="w-[90%] mx-auto" />
 
-      <main className="p-5 xs:px-0 space-y-5 sm:space-y-6">
-        <section>
+      <main className="p-5 xs:px-0 space-y-10 sm:space-y-6">
+        <section className="space-y-5">
           <h2 className="text-textcolor text-xl xs:text-lg font-medium">
             Polling Unit Info
           </h2>
@@ -38,7 +38,7 @@ export default async function PollingUnitResultPage({
 
         <hr className="w-[90%] mx-auto" />
 
-        <section>
+        <section className="space-y-5">
           <h2 className="text-textcolor text-xl xs:text-lg font-medium">
             Election Results
           </h2>

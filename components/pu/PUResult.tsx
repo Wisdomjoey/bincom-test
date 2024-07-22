@@ -29,20 +29,20 @@ function PUResult({ id }: { id: number }) {
       {results.map((result, ind) => {
         const percentage =
           (result.party_score /
-            results.reduce((a, b) => a + b.party_score, 0)) *
+            Math.max(...results.map((val) => val.party_score))) *
           100;
 
         return (
-          <div key={ind} className="space-y-3">
-            <h3 className="text-xl xs:text-lg font-medium uppercase">
+          <div key={ind} className="space-y-2">
+            <h3 className="text-lg xs:text-base font-medium uppercase">
               {result.party_abbreviation}
             </h3>
 
-            <div className="flex items-center gap-5 xs:gap-2 xs:flex-col">
+            <div className="flex items-center xs:items-start gap-5 xs:gap-1 xs:flex-col">
               <div className="flex-1 xs:w-full">
                 <div
                   style={{ width: `${percentage}%` }}
-                  className="h-8 bg-primary"
+                  className="h-8 sm:h-6 bg-primary"
                 ></div>
               </div>
 

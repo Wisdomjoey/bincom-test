@@ -163,26 +163,29 @@ function PollingUnitsDisplay() {
 
             <TableBody>
               {pollUnits.splice(start, 15).map((unit, ind) => (
-                <Link
+                <TableRow
                   key={ind}
-                  href={`/polling-unit-result?name=${unit.polling_unit_name}&id=${unit.polling_unit_id}`}
+                  tabIndex={0}
                   className="hover:bg-[#ededed] cursor-pointer"
+                  onClick={() =>
+                    router.push(
+                      `/polling-unit-result?name=${unit.polling_unit_name}&id=${unit.polling_unit_id}`
+                    )
+                  }
                 >
-                  <TableRow>
-                    <TableCell>{ind + 1}</TableCell>
-                    <TableCell>{unit.polling_unit_id}</TableCell>
-                    <TableCell>{unit.polling_unit_number}</TableCell>
-                    <TableCell>{unit.polling_unit_name}</TableCell>
-                    <TableCell>{unit.polling_unit_description ?? ""}</TableCell>
-                    <TableCell>{unit.entered_by_user ?? ""}</TableCell>
-                    <TableCell>{unit.user_ip_address ?? ""}</TableCell>
-                    <TableCell>
-                      {new Date(unit.date_entered).toDateString()}
-                    </TableCell>
-                    <TableCell>{unit.long}</TableCell>
-                    <TableCell>{unit.lat}</TableCell>
-                  </TableRow>
-                </Link>
+                  <TableCell>{ind + 1}</TableCell>
+                  <TableCell>{unit.polling_unit_id}</TableCell>
+                  <TableCell>{unit.polling_unit_number}</TableCell>
+                  <TableCell>{unit.polling_unit_name}</TableCell>
+                  <TableCell>{unit.polling_unit_description ?? ""}</TableCell>
+                  <TableCell>{unit.entered_by_user ?? ""}</TableCell>
+                  <TableCell>{unit.user_ip_address ?? ""}</TableCell>
+                  <TableCell>
+                    {new Date(unit.date_entered).toDateString()}
+                  </TableCell>
+                  <TableCell>{unit.long}</TableCell>
+                  <TableCell>{unit.lat}</TableCell>
+                </TableRow>
               ))}
             </TableBody>
 

@@ -26,7 +26,7 @@ export default async function ComparePage({
   const data3 = await fetchLGAPUResults(parseInt(lga as string));
 
   if (data3.error || !data3.data) return notFound();
-
+console.log(data3)
   return (
     <div className="px-3">
       <header className="relative px-8 py-6 xs:px-2 xs:py-5 flex items-center gap-5">

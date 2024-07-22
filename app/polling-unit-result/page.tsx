@@ -1,5 +1,6 @@
 import BasicInfo from "@/components/pu/BasicInfo";
 import PUResult from "@/components/pu/PUResult";
+import GoBack from "@/components/widgets/goBack";
 import { fetchPUById } from "@/data/polling_unit";
 import { notFound } from "next/navigation";
 
@@ -19,7 +20,9 @@ export default async function PollingUnitResultPage({
 
   return (
     <div className="px-3">
-      <header className="relative px-8 py-6 xs:px-2 xs:py-5">
+      <header className="relative px-8 py-6 xs:px-2 xs:py-5 flex items-center gap-5">
+        <GoBack />
+
         <h1 className="text-textcolor font-bold text-2xl xs:text-xl tracking-wider xs:tracking-wide capitalize">
           {name}: Polling Unit Election Results
         </h1>
@@ -27,7 +30,7 @@ export default async function PollingUnitResultPage({
 
       <hr className="w-[90%] mx-auto" />
 
-      <main className="p-5 xs:px-0 space-y-10 sm:space-y-6">
+      <main className="p-5 xs:px-0 space-y-10">
         <section className="space-y-5">
           <h2 className="text-textcolor text-xl xs:text-lg font-medium">
             Polling Unit Info

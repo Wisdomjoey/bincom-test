@@ -42,7 +42,7 @@ function PUResult({ id }: { id: number }) {
               <div className="flex-1 xs:w-full">
                 <div
                   style={{ width: `${percentage}%` }}
-                  className="h-8 sm:h-6 bg-primary"
+                  className="h-8 sm:h-5 bg-light"
                 ></div>
               </div>
 

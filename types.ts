@@ -87,5 +87,5 @@ export interface Ward {
 export interface APIResponse {
   success: boolean;
   message: string;
-  data: any;
+  data?: any;
 }

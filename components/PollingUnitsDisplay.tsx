@@ -125,6 +125,11 @@ function PollingUnitsDisplay() {
             variant="contained"
             title="New Unit"
             className="bg-primary text-[white] hover:bg-primary/80 xs:[&>span]:!m-0"
+            onClick={
+              lga === "" || ward === ""
+                ? undefined
+                : () => router.push(`/new-unit?lga=${lga}&ward=${ward}`)
+            }
             startIcon={
               <AddIcon fill="#fff" stroke="#fff" className="w-5 h-5" />
             }

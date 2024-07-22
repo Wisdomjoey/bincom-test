@@ -70,3 +70,41 @@ export const fetchWardPUs = async (ward_id: number) => {
     return { error: "Something went wrong" };
   }
 };
+
+export const createNewUnit = async (
+  form: FormData,
+  lga_id: number,
+  ward_id: number
+) => {
+  try {
+    const geo = new GeolocationCoordinates();
+    const lat = geo.latitude;
+    const long = geo.longitude;
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/polling-unit`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ward_id,
+        lga_id,
+        lat,
+        long,
+        name: form.get("name"),
+        description: form.get("description"),
+        entered_by: form.get("registrar"),
+      }),
+    });
+
+    if (!res.ok) return { error: "Failed to create Polling Unit" };
+
+    const data: APIResponse = await res.json();
+
+    return {
+      data: data.data as number,
+      success: "Successfully created polling unit",
+    };
+  } catch (error) {
+    return { error: "Something went wrong" };
+  }
+};

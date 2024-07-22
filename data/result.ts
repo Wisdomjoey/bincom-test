@@ -21,16 +21,13 @@ export const fetchTotalPollResults = async () => {
 
 export const fetchPollResult = async (uniqueid: number) => {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/pu-result`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ uniqueid }),
-      }
-    );
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pu-result`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ uniqueid }),
+    });
 
     if (!res.ok) return { error: "Failed to fetch data" };
 
@@ -39,6 +36,43 @@ export const fetchPollResult = async (uniqueid: number) => {
     return {
       data: data.data as PUResult[],
       success: "Successfully fetched data",
+    };
+  } catch (error) {
+    return { error: "Something went wrong" };
+  }
+};
+
+export const uploadResult = async (
+  form: FormData,
+  parties: string[],
+  id: number
+) => {
+  try {
+    let results: any = [];
+
+    parties.forEach((val) =>
+      results.push({ party: val, score: parseInt(form.get(val) as string) })
+    );
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/upload-result`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          uniqueid: id,
+          results,
+          entered_by: form.get("registrar"),
+        }),
+      }
+    );
+
+    if (!res.ok) return { error: "Failed to upload results" };
+
+    return {
+      success: "Successfully uploaded results",
     };
   } catch (error) {
     return { error: "Something went wrong" };

@@ -5,11 +5,11 @@ import { formatNmber } from "@/utils";
 function ResultOverview({
   puResults,
   lgaResults,
-  parties
+  parties,
 }: {
   puResults: PUResult[][];
   lgaResults: LGAResult[];
-  parties: string[]
+  parties: string[];
 }) {
   const fullResults = puResults.flatMap((v) => v.flatMap((t) => t));
   let scores: {
@@ -33,10 +33,10 @@ function ResultOverview({
   }[] = [];
 
   parties.forEach((party) => {
-    const lgaScore = lgaResults.filter(
-      (val) => val.party_abbreviation === party
-    )[0].party_score;
-    const puScore = scores.filter((val) => val.label === party)[0].result;
+    const lgaScore =
+      lgaResults.filter((val) => val.party_abbreviation === party)[0]
+        ?.party_score ?? 0;
+    const puScore = scores.filter((val) => val.label === party)[0]?.result ?? 0;
 
     if (lgaScore === puScore) return;
 

@@ -5,13 +5,12 @@ import { formatNmber } from "@/utils";
 function ResultOverview({
   puResults,
   lgaResults,
+  parties
 }: {
   puResults: PUResult[][];
   lgaResults: LGAResult[];
+  parties: string[]
 }) {
-  if (puResults.length <= 0) return;
-
-  const parties = puResults[0].map((val) => val.party_abbreviation);
   const fullResults = puResults.flatMap((v) => v.flatMap((t) => t));
   let scores: {
     label: string;

@@ -1,6 +1,7 @@
 import ResultOverview from "@/components/compare/ResultOverview";
 import PollingUnitsTable from "@/components/PollingUnitsTable";
 import GoBack from "@/components/widgets/goBack";
+import { fetchParties } from "@/data/party";
 import { fetchLGAPUs } from "@/data/polling_unit";
 import { fetchLGAPUResults, fetchLGAResult } from "@/data/result";
 import { notFound } from "next/navigation";
@@ -18,17 +19,19 @@ export default async function ComparePage({
   const data1 = await fetchLGAPUs(parseInt(lga as string));
 
   if (data1.error || !data1.data) return notFound();
-  console.log(data1)
 
   const data2 = await fetchLGAResult(parseInt(lga as string));
 
   if (data2.error || !data2.data) return notFound();
-  console.log(data2)
 
   const data3 = await fetchLGAPUResults(parseInt(lga as string));
 
   if (data3.error || !data3.data) return notFound();
-console.log(data3)
+
+  const data4 = await fetchParties();
+
+  if (data4.error || !data4.data) return notFound();
+
   return (
     <div className="px-3">
       <header className="relative px-8 py-6 xs:px-2 xs:py-5 flex items-center gap-5">

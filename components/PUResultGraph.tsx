@@ -35,12 +35,14 @@ function PUResultGraph({
         <PieChart
           tooltip={{ trigger: "item" }}
           colors={[
-            "#009933",
-            "#e7ae27",
-            "#576d2c",
-            "#43123c",
-            "254222",
-            "#4f6e71",
+            "#73a580",
+            "#a8ba9a",
+            "#30d5c8",
+            "#fffaca",
+            "679289",
+            "#c5e384",
+            "#800000",
+            "#ffff31",
           ]}
           loading={false}
           skipAnimation={true}

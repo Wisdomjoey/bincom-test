@@ -44,7 +44,7 @@ function ResultOverview({
   });
 
   return (
-    <div className="py-5">
+    <div className="py-5 space-y-5">
       <div className="flex items-center gap-10 sm:flex-col">
         <div className="flex-1 sm:w-full">
           <span className="xs:text-sm font-medium">Polling Unit Result</span>
@@ -71,7 +71,7 @@ function ResultOverview({
           Inconsistencies
         </h3>
 
-        <div className="space-y-2">
+        <div className="grid grid-cols-4 tablet:grid-cols-3 xs:grid-cols-2 gap-5">
           {inconsistencies.map((val, ind) => (
             <div key={ind} className="space-y-1">
               <h4 className="xs:text-sm font-medium">{val.party}</h4>

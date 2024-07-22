@@ -20,10 +20,10 @@ export default async function ComparePage({
   if (data1.error || !data1.data) return notFound();
   console.log(data1)
 
-  // const data2 = await fetchLGAResult(parseInt(lga as string));
+  const data2 = await fetchLGAResult(parseInt(lga as string));
 
-  // if (data2.error || !data2.data) return notFound();
-  // console.log(data2)
+  if (data2.error || !data2.data) return notFound();
+  console.log(data2)
 
   const data3 = await fetchLGAPUResults(parseInt(lga as string));
 
@@ -48,7 +48,7 @@ console.log(data3)
               Result Overview
             </h2>
 
-            {/* <ResultOverview lgaResults={data2.data} puResults={data3.data} /> */}
+            <ResultOverview lgaResults={data2.data} puResults={data3.data} />
           </section>
 
           <hr className="w-[90%] mx-auto" />

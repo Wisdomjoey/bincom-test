@@ -51,7 +51,11 @@ export default async function ComparePage({
               Result Overview
             </h2>
 
-            <ResultOverview lgaResults={data2.data} puResults={data3.data} />
+            <ResultOverview
+              lgaResults={data2.data}
+              puResults={data3.data}
+              parties={data4.data.map((val) => val.partyname)}
+            />
           </section>
 
           <hr className="w-[90%] mx-auto" />

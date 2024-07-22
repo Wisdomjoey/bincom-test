@@ -21,6 +21,9 @@ export const fetchLGAWards = async (lga_id: number) => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/lga-wards`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ lga_id }),
     });
 

@@ -25,6 +25,9 @@ export const fetchWardPUs = async (ward_id: number) => {
       `${process.env.NEXT_PUBLIC_API_URL}/ward-polling-units`,
       {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ ward_id }),
       }
     );

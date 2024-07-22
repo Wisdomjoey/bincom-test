@@ -132,7 +132,7 @@ function PollingUnitsDisplay() {
                 ? undefined
                 : () =>
                     router.push(
-                      `/new-unit?lga=${lga}&name=${
+                      `/compare-results?lga=${lga}&name=${
                         lgas.filter((val) => val.lga_id.toString() === lga)[0]
                           .lga_name
                       }`

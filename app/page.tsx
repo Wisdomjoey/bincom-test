@@ -24,7 +24,7 @@ export default function Home() {
 							<PUResultGraph />
 						</div>
 
-						<hr className="w-60 xs:w-32 md:border-l" />
+						<hr className="md:h-60 sm:w-60 xs:w-32 md:border-l" />
 
 						<div className="flex-1 sm:w-full">
 							<TotalOverview />

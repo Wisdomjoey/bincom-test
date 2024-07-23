@@ -84,10 +84,7 @@ function PollingUnitsDisplay() {
             label="LGA"
             value={lga}
             size="small"
-            onChange={(e) => {
-              console.log(e.target.value);
-              setLga(e.target.value);
-            }}
+            onChange={(e) => setLga(e.target.value)}
           >
             {lgas.map((lga, ind) => (
               <MenuItem key={ind} value={lga.lga_id}>
@@ -130,17 +127,17 @@ function PollingUnitsDisplay() {
           <Button
             variant="contained"
             className="bg-primary text-[white] hover:bg-primary/80"
-            onClick={() => {
-              console.log(lga);
-              console.log(lgas.filter((val) => val.lga_id.toString() === lga));
-              console.log(lgas.filter((val) => val.lga_id === parseInt(lga)));
-              router.push(
-                `/compare-results?lga=${lga}&name=${
-                  lgas.filter((val) => val.lga_id.toString() === lga)[0]
-                    .lga_name
-                }`
-              );
-            }}
+            onClick={
+              lga === ""
+                ? undefined
+                : () =>
+                    router.push(
+                      `/compare-results?lga=${lga}&name=${
+                        lgas.filter((val) => val.lga_id === parseInt(lga))[0]
+                          .lga_name
+                      }`
+                    )
+            }
           >
             Compare Results
           </Button>

@@ -132,7 +132,8 @@ function PollingUnitsDisplay() {
             className="bg-primary text-[white] hover:bg-primary/80"
             onClick={() => {
               console.log(lga);
-              console.log(lgas);
+              console.log(lgas.filter((val) => val.lga_id.toString() === lga));
+              console.log(lgas.filter((val) => val.lga_id === parseInt(lga)));
               router.push(
                 `/compare-results?lga=${lga}&name=${
                   lgas.filter((val) => val.lga_id.toString() === lga)[0]

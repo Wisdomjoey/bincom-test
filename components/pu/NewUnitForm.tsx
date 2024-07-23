@@ -70,7 +70,7 @@ function NewUnitForm({
         <NewUnitResult parties={parties} />
       </div>
 
-      <Button type="submit" className="mx-auto bg-primary hover:primary/80">
+      <Button type="submit" className="mx-auto bg-primary hover:primary/80 text-[white]">
         Submit Unit
       </Button>
 
